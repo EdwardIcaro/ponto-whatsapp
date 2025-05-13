@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Pontos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .table {
+            background-color: white;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        .status-entrada { background-color: #d4edda; color: #155724; }
+        .status-inicio_intervalo { background-color: #fff3cd; color: #856404; }
+        .status-fim_intervalo { background-color: #d4edda; color: #155724; }
+        .status-saida { background-color: #f8d7da; color: #721c24; }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="mb-0">Controle de Pontos</h3>
+                        <button class="btn btn-primary" onclick="atualizarTabela()">
+                            <i class="bi bi-arrow-repeat"></i> Atualizar
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Número</th>
+                                        <th>Tipo</th>
+                                        <th>Status</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaPontos">
+                                    <!-- Os dados serão inseridos aqui via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para formatar a data e hora
+        function formatarDataHora(horario) {
+            // Converter a string para Date
+            const data = new Date(horario);
+            
+            // Ajustar para o horário de Brasília (UTC-3)
+            data.setHours(data.getHours() - 3);
+            
+            // Formatar para o formato brasileiro
+            return data.toLocaleString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Função para remover ponto
+        function removerPonto(id) {
+            if (!confirm('Tem certeza que deseja remover este ponto? Esta ação não pode ser desfeita.')) {
+                return;
+            }
+
+            // Remover o ponto do banco de dados
+            fetch(`http://localhost:3000/api/pontos/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Ponto removido com sucesso!');
+                    atualizarTabela();
+                } else {
+                    alert('Erro ao remover o ponto: ' + result.error);
+                }
+            })
+            .catch(error => {
+                alert('Erro ao remover o ponto: ' + error.message);
+            });
+        }
+
+        // Função para atualizar a tabela
+        async function atualizarTabela() {
+            try {
+                const response = await fetch('http://localhost:3000/api/pontos');
+                const pontos = await response.json();
+                
+                const tbody = document.getElementById('tabelaPontos');
+                tbody.innerHTML = '';
+
+                pontos.forEach(ponto => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${ponto.nome}</td>
+                        <td>${ponto.numero}</td>
+                        <td>${ponto.tipo}</td>
+                        <td><span class="status status-${ponto.status.toLowerCase().replace(' ', '_')}">${ponto.status}</span></td>
+                        <td>${formatarDataHora(ponto.horario)}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="removerPonto(${ponto.id})">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                alert('Erro ao carregar os pontos: ' + error.message);
+            }
+        }
+
+        // Carregar a tabela quando a página carregar
+        document.addEventListener('DOMContentLoaded', atualizarTabela);
+    </script>
+</body>
+</html>

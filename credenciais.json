@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gerenciamento-de-ponto-458713",
+  "private_key_id": "4bf04bcfb8799dd97b8efb7734cf0998d3eceab6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCq3656CH9ntgmb\nSu32UcuextWRSJHE/adxGXQ02vR9aOb5PavNAWWPmHZxRK6LHMxD3bn4vN6IrySP\naB33/rn+3PUgSj3u5SR8IKSKiOVEBKy9r0ouU4AUchHwTd4AvLzpggeQ/nC/meQ8\nNi/EqgfxZ2DmezTJc4D4YRoe1TRbeYtdFi/nSyKxC5kiEQlVJjvhdoqXgFpSqC4Z\nsgjUFym7p2sHbs7Ifwj7FZkdzOOZq0kgm0Y4Auut6UE1tepU6TRJO7+WC+D5gdRh\n//JhyU19iBr1SMEhWzkVLyTFnLNDcuCUaY4JbPWVkydnMfhYTYjxXHtE4icf0mfV\nBT2S9Zl1AgMBAAECggEAH71j7fQVImEcgLWW5SnFbm1Vr2Jw/Uv2pdoKDWVcg80Q\nFlz/xBlN0bIK0jhlSZ7kTHjrugnvNil+W4sGAhJVX0OQ3tobjfwPXmU72yXZnFxX\n7/YXC+rjwCh+L4pvQejNGHzYRfUVYWnHDO4tylShHBTNWZKqN/9WBg0XaoHE83ae\nzGlOyRLCyFEUy2q8eAA2I8hoGBnoKZYSQx/tsjFjwWZP0Ze2y+N19rdEj1FNb9If\nFpEy8pUuQqsx/eFiBH1WkU/ZRFt9Av59gjDmm/uu6W+zeTpQkkxkrgtyP11xO00R\nnq61WrWkgNmeFu9cFBpOlHnTJ+EXII8GrcNzzXBREQKBgQDkjDrDVpvhjhYAObz7\ngovJ/agZ1ZbMOqrHAgDEesz5MscMfaW4poLzLg9ekhzwFkjMyiPkfe41t/dhrJIS\nrlzSf5wRqp2BgL11T8x1vpbK741XmKiYmPar0Zu4hEuhp15GDR9HwCI1DpGjC3hx\nRVrmq7NgOx9LS3jJ7mXBf6R5DQKBgQC/Zf6cya75PF2YZHFJf7EJs00nrjfnlX+L\nrevxRSGlbi2oZ9VBFTmcBD4Ljc273fz3/xrKHD4vD59chYvwgoc6hdO8V2aQNR2m\nsWpuGSJHD2xFRY+aHAz3Hb3VMft6Qb4syCiYavshdkZLaO6jBdFBrbyLX02Zanbi\nc0ObONy4CQKBgQCgQ0UhnSYJ8Jy048gFhfGIXvr1wrTP2YPPsTPgk0wQou65b5I5\n/WluJSpZ4pOwN7AtCsJIg5X6zVoHf/+eYe5tHVbPfJieKyyvipmRJ2iOPZUbi80N\n1JWEvqM3rG1smfSdoq4AnlZeZizx7CU1KLEpd9V88XhsUCwPTcDFA0DOMQKBgGaL\nFqaZx4zwspR6+9cM+qTf0253AKyqg/Mp80cIasZfCUc4miCMZpkYDMXT623DuUyE\n+K1gBFDiZdcEFb19sUXBfXdivCh2zLQKSaNDBAJeWPukERPYA3pCDPq0FK+jmWgU\ntOs0Jef/nhm41mGxNDOkCWgCX2jaiWc5qfb3uAlBAoGBAJl//DtgGOH09zsMuhRt\n7bpnMoEx/t9vLhGGf6sfs0tm8BEbaaL2PSoKjCt0wi6LqlD9z7tZKMFkHXSwHLVg\ns31PT29yULz8QxUHrwOabkBldWZYgs9AG+FAwaGEAChche0mFBbUOG6TLcFdZ1vD\nu9WVbSS6U3JjI7JnvqG+uHUN\n-----END PRIVATE KEY-----\n",
+  "client_email": "bot-ponto-whatsapp@gerenciamento-de-ponto-458713.iam.gserviceaccount.com",
+  "client_id": "108846854084161543663",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bot-ponto-whatsapp%40gerenciamento-de-ponto-458713.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

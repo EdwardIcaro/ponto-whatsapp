@@ -1,0 +1,21 @@
+Inicie o bot com node index.js ou nodemon index.js.
+iniciar o shell no " MySQL mysql -u root -p " em seguida " USE controle_ponto; " 
+para criar uma tabela novamente do zero se for necessário: DROP TABLE IF EXISTS pontos;
+CREATE TABLE pontos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100),
+  numero VARCHAR(20),
+  tipo VARCHAR(20),
+  horario DATETIME
+);
+
+
+CREATE TABLE colaboradores (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  numero VARCHAR(20) NOT NULL UNIQUE,
+  empresa VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE pontos ADD COLUMN status ENUM('entrada', 'intervalo', 'saida') NOT NULL DEFAULT 'entrada';
+fim da tabela

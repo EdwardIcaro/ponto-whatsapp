@@ -1,0 +1,20 @@
+-- Estrutura da tabela colaboradores
+CREATE TABLE IF NOT EXISTS colaboradores (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  numero VARCHAR(20) NOT NULL,
+  empresa VARCHAR(100) NOT NULL,
+  ativo BOOLEAN DEFAULT true,
+  horario DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Estrutura da tabela pontos
+CREATE TABLE IF NOT EXISTS pontos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  numero VARCHAR(20) NOT NULL,
+  tipo VARCHAR(50) NOT NULL,
+  horario DATETIME NOT NULL,
+  status VARCHAR(20) NOT NULL,
+  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+);

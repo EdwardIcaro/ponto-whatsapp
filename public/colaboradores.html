@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Colaboradores</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Gestão de Colaboradores</h1>
+    <form id="form-colaborador" class="mb-4">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" id="nome" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="numero" class="form-label">Contato:</label>
+        <input type="text" id="numero" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="empresa" class="form-label">Empresa:</label>
+        <select id="empresa" class="form-select" required>
+          <option value="Empresa 1">Empresa 1</option>
+          <option value="Empresa 2">Empresa 2</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Adicionar</button>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Contato</th>
+          <th>Empresa</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="colaboradores-tabela"></tbody>
+    </table>
+  </div>
+  <script>
+    const form = document.getElementById('form-colaborador');
+    const tabela = document.getElementById('colaboradores-tabela');
+
+    // Listar colaboradores
+    async function listarColaboradores() {
+      try {
+        const res = await fetch('/api/colaboradores');
+        const colaboradores = await res.json();
+        tabela.innerHTML = colaboradores.map(colaborador => `
+          <tr>
+            <td>${colaborador.id}</td>
+            <td>${colaborador.nome}</td>
+            <td>${colaborador.numero}</td>
+            <td>${colaborador.empresa}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removerColaborador(${colaborador.id})">
+                Remover
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error('Erro ao listar colaboradores:', error);
+        alert('Erro ao carregar a lista de colaboradores');
+      }
+    }
+
+    // Função para remover colaborador
+    async function removerColaborador(id) {
+      if (!confirm('Tem certeza que deseja remover este colaborador? Esta ação não pode ser desfeita.')) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/colaboradores/${id}`, {
+          method: 'DELETE'
+        });
+        const result = await response.json();
+        
+        if (response.ok) {
+          alert('Colaborador removido com sucesso!');
+          listarColaboradores(); // Atualizar a lista
+        } else {
+          alert('Erro ao remover o colaborador: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Erro ao remover colaborador:', error);
+        alert('Erro ao remover o colaborador: ' + error.message);
+      }
+    }
+
+    // Adicionar colaborador
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const numero = document.getElementById('numero').value;
+      const empresa = document.getElementById('empresa').value;
+
+      try {
+        const response = await fetch('/api/colaboradores', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nome, numero, empresa })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert('Colaborador adicionado com sucesso!');
+          form.reset(); // Limpar o formulário
+          listarColaboradores(); // Atualizar a lista
+        } else {
+          alert(`Erro ao adicionar colaborador: ${data.error}`);
+        }
+      } catch (error) {
+        console.error('Erro ao adicionar colaborador:', error);
+        alert('Erro ao adicionar colaborador. Por favor, verifique se o servidor está rodando.');
+      }
+    });
+
+    // Carregar lista inicial
+    listarColaboradores();
+  </script>
+</body>
+</html>

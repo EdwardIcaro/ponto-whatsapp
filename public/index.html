@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel de Pontos</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>Registros de Ponto</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Número</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody id="dados-ponto">
+      <!-- Linhas virão do JS -->
+    </tbody>
+  </table>
+
+  <script>
+    fetch('/api/pontos')
+      .then(res => res.json())
+      .then(dados => {
+        const corpo = document.getElementById('dados-ponto');
+        dados.forEach(ponto => {
+          const linha = document.createElement('tr');
+          linha.innerHTML = `
+            <td>${ponto.nome}</td>
+            <td>${ponto.numero}</td>
+            <td>${ponto.data}</td>
+            <td>${ponto.hora}</td>
+            <td>${ponto.tipo}</td>
+          `;
+          corpo.appendChild(linha);
+        });
+      });
+  </script>
+</body>
+</html>
